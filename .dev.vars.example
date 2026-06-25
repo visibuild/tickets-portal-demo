@@ -1,0 +1,11 @@
+# Local development secrets for `wrangler dev`.
+# Copy this file to `.dev.vars` and fill in real values. NEVER commit `.dev.vars`.
+#
+# In production these are set with `wrangler secret put <NAME>` instead.
+
+# Password used to reach the Settings page (/settings/login).
+ADMIN_PASSWORD="change-me-admin"
+
+# Random string used to sign session cookies. Generate one with:
+#   openssl rand -hex 32
+SESSION_SECRET="change-me-to-a-long-random-string"

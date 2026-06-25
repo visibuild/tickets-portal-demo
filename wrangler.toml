@@ -1,0 +1,27 @@
+# Cloudflare Worker configuration.
+# See DEPLOY.md for the full from-scratch setup guide.
+
+name = "visibuild-tickets-portal"
+main = "src/index.ts"
+compatibility_date = "2025-04-01"
+
+# Static assets (CSS, icons) are served straight from ./public.
+# Anything that isn't a file in ./public falls through to the Worker.
+[assets]
+directory = "./public"
+
+# Default Visibuild API base URL (AU/APAC region). This can be overridden in the
+# in-app Settings page; this is only the initial default.
+[vars]
+DEFAULT_API_URL = "https://app.apac.visibuild.com/api/core/v1"
+
+# Key-value store holding the editable configuration (Visibuild credentials,
+# exposed projects, viewer password). Create it once with:
+#   npx wrangler kv namespace create CONFIG
+# then paste the printed id below (replacing REPLACE_WITH_YOUR_KV_ID).
+[[kv_namespaces]]
+binding = "CONFIG"
+id = "REPLACE_WITH_YOUR_KV_ID"
+
+# Secrets (ADMIN_PASSWORD, SESSION_SECRET) are NOT stored here — set them with
+# `npx wrangler secret put <NAME>`. For local dev, put them in .dev.vars.
